@@ -1,36 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>		// Para usar strings
-
-// SOIL é a biblioteca para leitura das imagens
-#include "SOIL.h"
-
-// Um pixel RGB
-typedef struct {
-    unsigned char r, g, b;
-} RGB;
-
-// Uma imagem em RGB
-typedef struct {
-    int width, height;
-    RGB* img;
-} Img;
-
-// Protótipos
-void load(char* name, Img* pic);
-
-// Carrega uma imagem para a struct Img
-void load(char* name, Img* pic)
-{
-    int chan;
-    pic->img = (unsigned char*) SOIL_load_image(name, &pic->width, &pic->height, &chan, SOIL_LOAD_RGB);
-    if(!pic->img)
-    {
-        printf( "SOIL loading error: '%s'\n", SOIL_last_result() );
-        exit(1);
-    }
-    printf("Load: %d x %d x %d\n", pic->width, pic->height, chan);
-}
+#include <string.h>
+#include "crypto.h"
+#include "stego.h"
+#include "linkedlist.h"
 
 int main(int argc, char** argv)
 {
@@ -48,4 +21,18 @@ int main(int argc, char** argv)
     printf("\n");
 
     free(pic.img);
+
+    Node *p=0, *q=0;
+    char s[5]="test";
+    char s2[5]="tes";
+
+    fromstring(s, &p);
+    fromstring(s2, &q);
+
+    printf("\n%d\n",strllcmp(s,p));
+    printf("\n%d\n",llcmp(p,q));
+
+    destroy(p);
+    destroy(q);
+    return 0;
 }
