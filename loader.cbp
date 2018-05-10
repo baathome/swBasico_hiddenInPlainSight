@@ -57,6 +57,10 @@
 			<Add option="-fexceptions -std=c11" />
 			<Add directory="include/iup" />
 		</Compiler>
+		<Unit filename="crypto.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="crypto.h" />
 		<Unit filename="lib/SOIL/SOIL.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -75,9 +79,17 @@
 		<Unit filename="lib/SOIL/stb_image_aug.h" />
 		<Unit filename="lib/SOIL/stbi_DDS_aug.h" />
 		<Unit filename="lib/SOIL/stbi_DDS_aug_c.h" />
+		<Unit filename="linkedlist.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="linkedlist.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="stego.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="stego.h" />
 		<Extensions>
 			<envvars />
 			<code_completion />
