@@ -68,14 +68,15 @@ void fromstring(char *s, Node **p)
 
 
 ///Frees the entire list
-void destroy(Node *p)
+void destroy(Node **p)
 {
     Node *tmp;
-    while(p){
-        tmp=p;
-        p=p->next;
+    while(*p){
+        tmp=*p;
+        *p=(*p)->next;
         free(tmp);
     }
+    *p=0;
 }
 
 
@@ -83,19 +84,25 @@ void destroy(Node *p)
 void splitonzero(Node *p, Node **q)
 {
 	if(!p) return;
-	if(!p->next) return;
+	if(!(p->next)) return;
 	while(p->next->c){
 		p=p->next;
 	}
-	*q=p->next->next;
+
+	(*q)=p->next->next;
+
 	free(p->next);
+
 	p->next=0;
-	if(!*q) return;
+
+	if(!(*q)) return;
 	if(!((*q)->next)) return;
-	Node *aux=(*q);
+
+	Node (*aux)=(*q);
 	while(aux->next->c){
 		aux=aux->next;
 	}
 	free(aux->next);
 	aux->next=0;
+
 }

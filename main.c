@@ -14,47 +14,52 @@ int main(int argc, char** argv)
     }
     load(argv[1], &pic);
 
-    printf("Primeiros 10 pixels da imagem:\n");
-    for(int i=0; i<10; i++) {
-        printf("[%02X %02X %02X] ", pic.img[i].r, pic.img[i].g, pic.img[i].b);
+    if(!strcmp(argv[2], "-c")){
+        char message[1001];
+        char password[101];
+
+        printf("\nDigite sua mensagem: ");
+        gets(message);
+
+        printf("\nDigite uma senha: ");
+        gets(password);
+
+        strxormask(message);
+        strxormask(password);
+
+        writestego(&pic, password, message);
+
+        int i=-1;
+        while(argv[1][++i]!='.');
+        argv[1][++i] = 'b';
+        argv[1][++i] = 'm';
+        argv[1][++i] = 'p';
+        argv[1][++i] = 0;
+
+        SOIL_save_image(argv[1], SOIL_SAVE_TYPE_BMP, pic.width, pic.height, 3, pic.img);
     }
-    printf("\n");
+    else if(!strcmp(argv[2], "-d")){
+        Node *pass=0, *msg=0;
 
+        readstego(pic, &pass, &msg);
 
+        llxormask(pass);
 
-    Node *p=0, *q=0;
-    char s[5]="test";
-    char s2[15]="hello world";
+        if(!strllcmp(argv[3], pass)){
+            llxormask(msg);
+            printf("\nMensagem: ");
+            printl(msg);
+        }
+        else{
+            printf("\nSenha Incorreta\n");
+            printl(msg);
+        }
+        printf("\n");
 
-    fromstring(s, &p);
-    fromstring(s2, &q);
-
-    writestego(&pic, s, s2);
-    readstego(pic, &p, &q);
-
-    printf("\npassword = ");
-    printl(p);
-    printf("\nmsg = ");
-    printl(q);
-    printf("\n\n");
-
-
+        destroy(&pass);
+        destroy(&msg);
+    }
 
     free(pic.img);
-
-
-
-    printf("\n%d\n",strllcmp(s,p));
-    printf("\n%d\n",llcmp(p,q));
-
-    destroy(p);
-    destroy(q);
-
-
-    Node *password=0, *message=0;
-
-
-    destroy(password);
-    destroy(message);
     return 0;
 }

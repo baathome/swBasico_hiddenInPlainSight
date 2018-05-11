@@ -10,17 +10,17 @@ void load(char* name, Img* pic)
         printf( "SOIL loading error: '%s'\n", SOIL_last_result() );
         exit(1);
     }
-    printf("Load: %d x %d x %d\n", pic->width, pic->height, chan);
+    //printf("Load: %d x %d x %d\n", pic->width, pic->height, chan);
 }
 
 ///Reads encrypted password and message from image
 ///@params pic is a struct representing the image (defined in stego.h), pass and msg are linked lists of characters that contain the (encrypted) password and message, respectively
 void readstego(Img pic, Node **pass, Node **msg)
 {
-	char tmp;
+	char tmp=0;
 	int bitcount=0, i=0, zflag=0;
 	while(zflag<2){
-		tmp = pic.img[i].r & 0b00000011 << (6-bitcount);
+		tmp += (pic.img[i].r & 0b00000011) << (6-bitcount);
 		bitcount += 2;
 		if(bitcount == 8){
 			if(!tmp){
@@ -28,8 +28,9 @@ void readstego(Img pic, Node **pass, Node **msg)
 			}
 			append(tmp, pass);
 			bitcount=0;
+			tmp=0;
 		}
-		tmp = pic.img[i].g & 0b00000011 << (6-bitcount);
+		tmp += (pic.img[i].g & 0b00000011) << (6-bitcount);
 		bitcount += 2;
 		if(bitcount == 8){
 			if(!tmp){
@@ -37,8 +38,9 @@ void readstego(Img pic, Node **pass, Node **msg)
 			}
 			append(tmp, pass);
 			bitcount=0;
+			tmp=0;
 		}
-		tmp = pic.img[i].b & 0b00000011 << (6-bitcount);
+		tmp += (pic.img[i].b & 0b00000011) << (6-bitcount);
 		bitcount += 2;
 		if(bitcount == 8){
 			if(!tmp){
@@ -46,9 +48,11 @@ void readstego(Img pic, Node **pass, Node **msg)
 			}
 			append(tmp, pass);
 			bitcount=0;
+			tmp=0;
 		}
 		i++;
 	}
+
 	splitonzero(*pass, msg);
 }
 
@@ -60,37 +64,42 @@ void writestego(Img *pic, char *pass, char *msg)
 	int bitcount=0, i=0, j=0;
 	char breakstate=0;
 
-
 	while(1){
-		pic->img[i].r = (pic->img[i].r & 0b11111100) | (pass[j] >> (6-bitcount));
+
+        pic->img[i].r = (pic->img[i].r & 0b11111100) | ((pass[j] >> (6-bitcount) & 0b00000011));
+
 		bitcount += 2;
 		if(bitcount == 8){
-			if(!pass[j]){
+            bitcount=0;
+			j++;
+			if(!pass[j-1]){
 				breakstate='r';
 				break;
 			}
-			bitcount=0;
-			j++;
 		}
-		pic->img[i].g = (pic->img[i].g & 0b11111100) | (pass[j] >> (6-bitcount));
+
+		pic->img[i].g = (pic->img[i].g & 0b11111100) | ((pass[j] >> (6-bitcount) & 0b00000011));
+
 		bitcount += 2;
 		if(bitcount == 8){
-			if(!pass[j]){
+            bitcount=0;
+			j++;
+			if(!pass[j-1]){
 				breakstate='g';
 				break;
 			}
-			bitcount=0;
-			j++;
 		}
-		pic->img[i].b = (pic->img[i].b & 0b11111100) | (pass[j] >> (6-bitcount));
+
+		pic->img[i].b = (pic->img[i].b & 0b11111100) | ((pass[j] >> (6-bitcount) & 0b00000011));
+
 		bitcount += 2;
 		if(bitcount == 8){
-			if(!pass[j]){
+            bitcount=0;
+			j++;
+			if(!pass[j-1]){
 				breakstate='b';
 				break;
 			}
-			bitcount=0;
-			j++;
 		}
 		i++;
 	}
@@ -99,21 +108,21 @@ void writestego(Img *pic, char *pass, char *msg)
 
 
 	switch(breakstate){
+	case 'b':
+		pic->img[i].r = (pic->img[i].r & 0b11111100) | ((msg[j] >> (6-bitcount) & 0b00000011));
+		bitcount += 2;
 	case 'r':
-		pic->img[i].r = (pic->img[i].r & 0b11111100) | (pass[j] >> (6-bitcount));
+		pic->img[i].g = (pic->img[i].g & 0b11111100) | ((msg[j] >> (6-bitcount) & 0b00000011));
 		bitcount += 2;
 	case 'g':
-		pic->img[i].g = (pic->img[i].g & 0b11111100) | (pass[j] >> (6-bitcount));
-		bitcount += 2;
-	case 'b':
-		pic->img[i].b = (pic->img[i].b & 0b11111100) | (pass[j] >> (6-bitcount));
+		pic->img[i].b = (pic->img[i].b & 0b11111100) | ((msg[j] >> (6-bitcount) & 0b00000011));
 		bitcount += 2;
 		i++;
 	}
 
 
 	while(1){
-		pic->img[i].r = (pic->img[i].r & 0b11111100) | (msg[j] >> (6-bitcount));
+		pic->img[i].r = (pic->img[i].r & 0b11111100) | ((msg[j] >> (6-bitcount) & 0b00000011));
 		bitcount += 2;
 		if(bitcount == 8){
 			if(!msg[j]){
@@ -122,7 +131,7 @@ void writestego(Img *pic, char *pass, char *msg)
 			bitcount=0;
 			j++;
 		}
-		pic->img[i].g = (pic->img[i].g & 0b11111100) | (msg[j] >> (6-bitcount));
+		pic->img[i].g = (pic->img[i].g & 0b11111100) | ((msg[j] >> (6-bitcount) & 0b00000011));
 		bitcount += 2;
 		if(bitcount == 8){
 			if(!msg[j]){
@@ -131,7 +140,7 @@ void writestego(Img *pic, char *pass, char *msg)
 			bitcount=0;
 			j++;
 		}
-		pic->img[i].b = (pic->img[i].b & 0b11111100) | (msg[j] >> (6-bitcount));
+		pic->img[i].b = (pic->img[i].b & 0b11111100) | ((msg[j] >> (6-bitcount) & 0b00000011));
 		bitcount += 2;
 		if(bitcount == 8){
 			if(!msg[j]){
@@ -143,13 +152,3 @@ void writestego(Img *pic, char *pass, char *msg)
 		i++;
 	}
 }
-
-/*
-
-
-    printf("Primeiros 10 pixels da imagem:\n");
-    for(int i=0; i<10; i++) {
-        printf("[%02X %02X %02X] ", pic.img[i].r, pic.img[i].g, pic.img[i].b);
-    }
-    printf("\n");
-*/

@@ -23,7 +23,7 @@ int llcmp(Node *p, Node *q); ///Compares two lists. Returns 0 on equal, 1 on dif
 
 void fromstring(char *s, Node **p); ///Creates a linked list from regular C string (char array)
 
-void destroy(Node *p); ///Frees the entire list
+void destroy(Node **p); ///Frees the entire list
 
 void splitonzero(Node *p, Node **q); ///Separates p into two lists on a \0 character (first part in p, second in q)
 

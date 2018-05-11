@@ -117,23 +117,23 @@
 
 1504289654 /home/10049190/git/progswb2/trab/t1-181-i75gyrjfdry/loader/SOIL.h
 
-1525985800 source:c:\users\bthome\desktop\swbasico\lib\soil\image_dxt.c
+1525928363 source:c:\users\bthome\desktop\swbasico\lib\soil\image_dxt.c
 	"image_DXT.h"
 	<math.h>
 	<stdlib.h>
 	<string.h>
 	<stdio.h>
 
-1525985800 c:\users\bthome\desktop\swbasico\lib\soil\image_dxt.h
+1525928363 c:\users\bthome\desktop\swbasico\lib\soil\image_dxt.h
 
-1525985800 source:c:\users\bthome\desktop\swbasico\lib\soil\image_helper.c
+1525928363 source:c:\users\bthome\desktop\swbasico\lib\soil\image_helper.c
 	"image_helper.h"
 	<stdlib.h>
 	<math.h>
 
-1525985800 c:\users\bthome\desktop\swbasico\lib\soil\image_helper.h
+1525928363 c:\users\bthome\desktop\swbasico\lib\soil\image_helper.h
 
-1525985800 source:c:\users\bthome\desktop\swbasico\lib\soil\soil.c
+1525928364 source:c:\users\bthome\desktop\swbasico\lib\soil\soil.c
 	<windows.h>
 	<wingdi.h>
 	<GL/gl.h>
@@ -147,12 +147,12 @@
 	<stdlib.h>
 	<string.h>
 
-1525985800 c:\users\bthome\desktop\swbasico\lib\soil\soil.h
+1525928363 c:\users\bthome\desktop\swbasico\lib\soil\soil.h
 
-1525985800 c:\users\bthome\desktop\swbasico\lib\soil\stb_image_aug.h
+1525928364 c:\users\bthome\desktop\swbasico\lib\soil\stb_image_aug.h
 	<stdio.h>
 
-1525985800 source:c:\users\bthome\desktop\swbasico\lib\soil\stb_image_aug.c
+1525928364 source:c:\users\bthome\desktop\swbasico\lib\soil\stb_image_aug.c
 	"stb_image_aug.h"
 	<math.h>
 	<string.h>
@@ -164,11 +164,11 @@
 	"stbi_DDS_aug.h"
 	"stbi_DDS_aug_c.h"
 
-1525985800 c:\users\bthome\desktop\swbasico\lib\soil\stbi_dds_aug.h
+1525928363 c:\users\bthome\desktop\swbasico\lib\soil\stbi_dds_aug.h
 
-1525985800 c:\users\bthome\desktop\swbasico\lib\soil\stbi_dds_aug_c.h
+1525928363 c:\users\bthome\desktop\swbasico\lib\soil\stbi_dds_aug_c.h
 
-1525997904 source:c:\users\bthome\desktop\swbasico\main.c
+1526066226 source:c:\users\bthome\desktop\swbasico\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -176,28 +176,28 @@
 	"stego.h"
 	"linkedlist.h"
 
-1525985800 c:\users\bthome\desktop\swbasico\soil.h
+1525928364 c:\users\bthome\desktop\swbasico\soil.h
 
-1525989396 source:c:\users\bthome\desktop\swbasico\crypto.c
+1526022900 source:c:\users\bthome\desktop\swbasico\crypto.c
 	"crypto.h"
 
-1525989260 c:\users\bthome\desktop\swbasico\crypto.h
+1526022900 c:\users\bthome\desktop\swbasico\crypto.h
 	<string.h>
 	"linkedlist.h"
 
-1525988744 source:c:\users\bthome\desktop\swbasico\linkedlist.c
+1526066252 source:c:\users\bthome\desktop\swbasico\linkedlist.c
 	"linkedlist.h"
 
-1525989635 c:\users\bthome\desktop\swbasico\linkedlist.h
+1526062106 c:\users\bthome\desktop\swbasico\linkedlist.h
 	<stdlib.h>
 	<stdio.h>
 
-1525997634 c:\users\bthome\desktop\swbasico\stego.h
+1526022900 c:\users\bthome\desktop\swbasico\stego.h
 	"SOIL.h"
 	<stdio.h>
 	<stdlib.h>
 	"linkedlist.h"
 
-1525975029 source:c:\users\bthome\desktop\swbasico\stego.c
+1526066353 source:c:\users\bthome\desktop\swbasico\stego.c
 	"stego.h"
 
