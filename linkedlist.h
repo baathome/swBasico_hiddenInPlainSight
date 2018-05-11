@@ -25,4 +25,6 @@ void fromstring(char *s, Node **p); ///Creates a linked list from regular C stri
 
 void destroy(Node *p); ///Frees the entire list
 
+void splitonzero(Node *p, Node **q); ///Separates p into two lists on a \0 character (first part in p, second in q)
+
 #endif // linkedlist_h

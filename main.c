@@ -20,19 +20,41 @@ int main(int argc, char** argv)
     }
     printf("\n");
 
-    free(pic.img);
+
 
     Node *p=0, *q=0;
     char s[5]="test";
-    char s2[5]="tes";
+    char s2[15]="hello world";
 
     fromstring(s, &p);
     fromstring(s2, &q);
+
+    writestego(&pic, s, s2);
+    readstego(pic, &p, &q);
+
+    printf("\npassword = ");
+    printl(p);
+    printf("\nmsg = ");
+    printl(q);
+    printf("\n\n");
+
+
+
+    free(pic.img);
+
+
 
     printf("\n%d\n",strllcmp(s,p));
     printf("\n%d\n",llcmp(p,q));
 
     destroy(p);
     destroy(q);
+
+
+    Node *password=0, *message=0;
+
+
+    destroy(password);
+    destroy(message);
     return 0;
 }

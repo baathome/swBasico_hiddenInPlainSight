@@ -5,6 +5,7 @@
 #include "SOIL.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "linkedlist.h"
 
 // Um pixel RGB
 typedef struct {
@@ -18,5 +19,9 @@ typedef struct {
 } Img;
 
 void load(char* name, Img* pic); // Carrega uma imagem para a struct Img
+
+void readstego(Img i, Node **pass, Node **msg); ///Reads encrypted password and message from image
+
+void writestego(Img *pic, char *pass, char *msg); ///Writes encrypted password and message to image
 
 #endif // stego_h

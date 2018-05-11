@@ -77,3 +77,25 @@ void destroy(Node *p)
         free(tmp);
     }
 }
+
+
+///Separates p into two lists on a \0 character (first part in p, second in q)
+void splitonzero(Node *p, Node **q)
+{
+	if(!p) return;
+	if(!p->next) return;
+	while(p->next->c){
+		p=p->next;
+	}
+	*q=p->next->next;
+	free(p->next);
+	p->next=0;
+	if(!*q) return;
+	if(!((*q)->next)) return;
+	Node *aux=(*q);
+	while(aux->next->c){
+		aux=aux->next;
+	}
+	free(aux->next);
+	aux->next=0;
+}
